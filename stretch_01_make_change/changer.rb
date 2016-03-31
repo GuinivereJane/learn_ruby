@@ -2,52 +2,34 @@ require "pry"
 
 
 class Changer
-  attr_accessor :pennies, :change
-
-  @pennies
-  @change = []
-
-  def self.coppers
-    @pennies.times {@change << 1}
-    done
+  
+  def self.coppers(pennies,change)
+    pennies.times {change << 1}
+    change
   end
 
-  def self.nickels
-    temp = @pennies / 5
-    @pennies = @pennies % 5
-    temp.floor
-    temp.times {@change << 5}
-    coppers
+  def self.nickels(pennies,change)
+    (pennies / 5).floor.times {change << 5}
+    coppers(pennies % 5,change)
   end
 
 
-  def self.dimes
-    temp = @pennies / 10
-    @pennies = @pennies % 10
-    temp.floor
-    temp.times {@change << 10}
-    nickels
+  def self.dimes(pennies,change)
+    (pennies / 10).floor.times {change << 10}
+    nickels(pennies % 10,change)
   end
 
-
-  def self.quarters
-    temp = @pennies / 25
-    @pennies = @pennies % 25
-    temp = temp.floor
-    temp.times {@change << 25}
-    dimes
+  def self.quarters(pennies,change)
+    (pennies / 25).floor.times {change << 25}
+    dimes(pennies % 25, change)
   end
 
   def self.make_change(pennies)
-    @pennies = pennies
-    quarters
+    change = []
+    quarters(pennies,change)
   end
 
-  def self.done
-    temp = @change
-    @change = []
-    temp
-  end
+
 
 
 end
